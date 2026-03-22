@@ -3,13 +3,13 @@ import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA_gzpG2mJL-dxI24WswOnk_bn0kzgotCA",
-  authDomain: "studyduel-f6702.firebaseapp.com",
-  databaseURL: "https://studyduel-f6702-default-rtdb.firebaseio.com",
-  projectId: "studyduel-f6702",
-  storageBucket: "studyduel-f6702.firebasestorage.app",
-  messagingSenderId: "941536859007",
-  appId: "1:941536859007:web:870cc5fe89d2988b70004a"
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  databaseURL: import.meta.env.VITE_DATABASE_URL,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);

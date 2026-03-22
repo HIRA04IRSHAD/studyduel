@@ -19,7 +19,7 @@ function Layout({ children }) {
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>
       <Sidebar />
-      <div style={{ flex: 1, padding: "24px", overflowY: "auto" }}>
+      <div style={{ marginLeft: "180px", flex: 1, padding: "24px", minHeight: "100vh" }}>
         {children}
       </div>
     </div>
