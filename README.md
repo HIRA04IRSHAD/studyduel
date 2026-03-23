@@ -16,6 +16,9 @@ A competitive study tracker built for two users preparing for GATE + DSA togethe
 - React (Vite)
 - Firebase Auth + Realtime Database + Hosting
 
+## Prototype
+[studyduel_ui_prototype.html](https://github.com/user-attachments/files/26188201/studyduel_ui_prototype.html)
+
 ## Setup
 1. Clone the repo
 2. Run `npm install`
@@ -24,6 +27,3 @@ A competitive study tracker built for two users preparing for GATE + DSA togethe
 
 ## Made by
 HIRA04IRSHAD
-
-## Prototype
-[studyduel_ui_prototype.html](https://github.com/user-attachments/files/26188201/studyduel_ui_prototype.html)
