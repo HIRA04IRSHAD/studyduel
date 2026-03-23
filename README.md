@@ -24,3 +24,6 @@ A competitive study tracker built for two users preparing for GATE + DSA togethe
 
 ## Made by
 HIRA04IRSHAD
+
+## Prototype
+[studyduel_ui_prototype.html](https://github.com/user-attachments/files/26188201/studyduel_ui_prototype.html)
