@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
 import Login from "./pages/Login";
+import TeamSetup from "./pages/TeamSetup";
 import Dashboard from "./pages/Dashboard";
 import Tasks from "./pages/Tasks";
 import DSATracker from "./pages/DSATracker";
@@ -11,8 +12,10 @@ import Battle from "./pages/Battle";
 import Sidebar from "./components/Sidebar";
 
 function PrivateRoute({ children }) {
-  const { user } = useAuth();
-  return user ? children : <Navigate to="/login" />;
+  const { user, teamId } = useAuth();
+  if (!user) return <Navigate to="/login" />;
+  if (!teamId) return <Navigate to="/team-setup" />;
+  return children;
 }
 
 function Layout({ children }) {
@@ -30,6 +33,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
+      <Route path="/team-setup" element={<TeamSetup />} />
       <Route path="/" element={<PrivateRoute><Layout><Dashboard /></Layout></PrivateRoute>} />
       <Route path="/tasks" element={<PrivateRoute><Layout><Tasks /></Layout></PrivateRoute>} />
       <Route path="/dsa" element={<PrivateRoute><Layout><DSATracker /></Layout></PrivateRoute>} />

@@ -4,19 +4,20 @@ import { ref, onValue, set } from "firebase/database";
 import { useAuth } from "../context/AuthContext";
 
 export default function Dashboard() {
-  const { user } = useAuth();
+  const { user, teamId } = useAuth();
   const [exams, setExams] = useState([]);
   const [examName, setExamName] = useState("");
   const [examDate, setExamDate] = useState("");
 
   useEffect(() => {
-    const r = ref(db, "exams");
+    if (!teamId) return;
+    const r = ref(db, `teams/${teamId}/exams`);
     onValue(r, (snap) => {
       const data = snap.val();
       if (data) setExams(Object.values(data));
       else setExams([]);
     });
-  }, []);
+  }, [teamId]);
 
   function daysLeft(dateStr) {
     const today = new Date(); today.setHours(0,0,0,0);
@@ -26,12 +27,12 @@ export default function Dashboard() {
   function addExam() {
     if (!examName || !examDate) return;
     const id = Date.now();
-    set(ref(db, `exams/${id}`), { id, name: examName, date: examDate });
+    set(ref(db, `teams/${teamId}/exams/${id}`), { id, name: examName, date: examDate });
     setExamName(""); setExamDate("");
   }
 
   function removeExam(id) {
-    set(ref(db, `exams/${id}`), null);
+    set(ref(db, `teams/${teamId}/exams/${id}`), null);
   }
 
   const card = { background: "#1a1a1a", border: "0.5px solid #2a2a2a", borderRadius: "12px", padding: "16px 18px", marginBottom: "12px" };
@@ -40,14 +41,15 @@ export default function Dashboard() {
   return (
     <div>
       <h2 style={{ fontSize: "20px", fontWeight: "500", marginBottom: "4px" }}>Dashboard</h2>
-      <p style={{ fontSize: "13px", color: "#666", marginBottom: "20px" }}>
+      <p style={{ fontSize: "13px", color: "#666", marginBottom: "4px" }}>
         Welcome, {user?.email?.split("@")[0]}
       </p>
+      <p style={{ fontSize: "11px", color: "#444", marginBottom: "20px" }}>
+        Team code: <span style={{ color: "#1D9E75", letterSpacing: "2px", fontWeight: "500" }}>{teamId}</span>
+      </p>
 
-      {/* Exam Countdown */}
       <div style={card}>
         <p style={{ fontSize: "13px", fontWeight: "500", marginBottom: "12px" }}>Exam Countdowns</p>
-
         <div style={{ display: "flex", gap: "8px", marginBottom: "12px", flexWrap: "wrap" }}>
           <input style={{ ...inp, width: "140px" }} placeholder="Exam name" value={examName} onChange={e => setExamName(e.target.value)} />
           <input style={{ ...inp, width: "150px" }} type="date" value={examDate} onChange={e => setExamDate(e.target.value)} />
