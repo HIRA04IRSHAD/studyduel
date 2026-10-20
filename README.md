@@ -2,6 +2,8 @@
 
 A competitive study tracker built for two users preparing for GATE + DSA together.
 
+**Live app:** https://studyduel-f6702.web.app (sign up with two accounts, create a team in one and join it from the other with the team code)
+
 ## Features
 - Daily task checklist with streaks
 - DSA topic-wise progress tracker
